@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>EVENTIFY - Booking</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial
+        }
+
+        body {
+            background: #f2f2f5
+        }
+
+        nav {
+            background: #fff;
+            padding: 14px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        nav h1 {
+            font-size: 28px
+        }
+
+        nav h1 span {
+            color: #6d28d9
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #4f46e5;
+            font-weight: bold
+        }
+
+        .box {
+            background: #fff;
+            max-width: 600px;
+            margin: 30px auto;
+            padding: 30px;
+            border-radius: 15px
+        }
+
+        .box h2 {
+            margin-bottom: 5px
+        }
+
+        .box p {
+            color: #555;
+            margin-bottom: 20px
+        }
+
+        .box img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 15px
+        }
+
+        .info {
+            background: #eef2ff;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 15px
+        }
+
+        .info b {
+            color: #4f46e5
+        }
+
+        label {
+            display: block;
+            margin: 12px 0 5px;
+            font-weight: bold;
+            font-size: 14px
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            outline: none
+        }
+
+        input[readonly] {
+            background: #f5f5f5;
+            color: #333;
+            font-weight: bold
+        }
+
+        .btn {
+            width: 100%;
+            margin-top: 18px;
+            background: #4f46e5;
+            color: #fff;
+            border: none;
+            padding: 13px;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer
+        }
+
+        .btn:hover {
+            background: #3730a3
+        }
+
+        #msg {
+            margin-top: 12px;
+            font-weight: bold;
+            text-align: center
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <h1 style="color: black; font-family: fantasy;"> EVENTIFY</span></h1>
+        <a href="home.html">← Back to Home</a>
+    </nav>
+
+    <div class="box">
+        <h2>Book Your Venue</h2>
+        <p></p>
+
+        <img id="venueImg" src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800">
+
+        <
+
+        <label>Venue Selected</label>
+        <input id="venueName" placeholder="ENTER THE VENUE" required>
+
+        <label>City</label>
+        <input id="cityName" placeholder="ENTER THE CITY NAME" required>
+
+        <label>Your Name</label>
+        <input id="custName" placeholder="ENTER YOUR NAME" required>
+
+        <label>Phone Number</label>
+        <input id="phone" placeholder="XXXXX XXXXX" required>
+
+        <label>Date</label>
+        <input type="date" id="bookDate">
+
+        <label>Guests</label>
+        <input type="number" id="bookGuests" placeholder="100" required>
+
+        <label>Event Type</label>
+        <select id="eventType">
+            <option>Wedding</option>
+            <option>Conference</option>
+            <option>Party</option>
+            <option>Birthday</option>
+        </select>
+
+        <a href="confirmed.html"><button class="btn" onclick="confirmBooking()">Confirm Booking ✅</button></a>
+        <p id="msg"></p>
+    </div>
+
+    <script>
+        // Home page la irundhu vantha venue & city ah edukkura code
+        // Ex: booking.html?venue=Nellai Grand Mahal&city=Tirunelveli
+        const params = new URLSearchParams(window.location.search);
+        const venue = params.get("venue") || "Wedding Hall";
+        const city = params.get("city") || "Tirunelveli";
+
+        document.getElementById("venueName").value = venue;
+        document.getElementById("cityName").value = city;
+        document.getElementById("venueText").innerText = venue;
+        document.getElementById("cityText").innerText = city;
+
+        // Venue name ku etha maari photo & price maathura code
+        let img = "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800";
+        let price = "₹25,000 / day";
+        let type = "Wedding";
+
+        if (venue.includes("Conference") || venue.includes("Tech") || venue.includes("Business") || venue.includes("Hub")) {
+            img = "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=800";
+            price = "₹10,000 / day"; type = "Conference";
+        }
+        if (venue.includes("Party") || venue.includes("Blast") || venue.includes("Cool")) {
+            img = "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=800";
+            price = "₹8,000 / day"; type = "Party";
+        }
+        // Ooty, Chennai maari periya ooruku price konjam jaasthi
+        if (city === "Chennai") price = "₹50,000 / day";
+        if (city === "Ooty") price = "₹35,000 / day";
+        if (city === "Coimbatore") price = "₹30,000 / day";
+
+        document.getElementById("venueImg").src = img;
+        document.getElementById("priceText").innerText = price;
+        document.getElementById("eventType").value = type;
+
+        function confirmBooking() {
+            const name = document.getElementById("custName").value;
+            const phone = document.getElementById("phone").value;
+            const date = document.getElementById("bookDate").value;
+            const guests = document.getElementById("bookGuests").value;
+            const msg = document.getElementById("msg");
+
+            
+           
+    </script>
+</body>
+
+</html>
